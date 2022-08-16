@@ -6,8 +6,8 @@
     "dev":"next .  ",
     "start": "next start",
     "lint": "next lint",
-    "build": " set APP_ENV=dev   &&next build   ",
-    "build1": " set APP_ENV=dev  &&next build   &&next export",
+    "build": " next build   ",
+    "build1": " next build   &&next export",
     "server": "cd ./service  &&yarn dev"
   },
   "dependencies": {

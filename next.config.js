@@ -5,7 +5,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
 const { createProxyMiddleware } = require('http-proxy-middleware');
 module.exports = {
-  assetPrefix:'/',
+  assetPrefix: "/front", //加前缀
+  basePath: "/front", //node
   distDir: 'build',
   images: {
     loader: 'akamai',

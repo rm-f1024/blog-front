@@ -35,7 +35,7 @@ module.exports = appInfo => {
     // database configuration
     client: {
       // host
-      host: 'localhost',
+      host: '127.0.0.1',
       // port
       port: '3306',
       // username
@@ -57,10 +57,8 @@ module.exports = appInfo => {
     
     },
     domainWhiteList:[
-      'http://localhost:2000',
+    'http://127.0.0.1:3000',
     'http://localhost:3000',
-    'http://localhost:5000',
-    'http://localhost',
   ]//[]中放放出的白名单，*代表所有
   };
   

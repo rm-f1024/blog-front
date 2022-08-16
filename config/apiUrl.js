@@ -1,14 +1,13 @@
 
 
-//const ipUrl = 'http://106.52.41.19:3000/api/default' 线上地址
 
 let ipUrl = null; //接口
-if(process.env.APP_ENV?.trim()==="pro"){
-    //生产环境接口地址
-    ipUrl="http://localhost/api/default"
-}else {
+if(process.env.APP_ENV?.trim()==="dev"){
     //开发以及测试环境接口地址(我这里开发环境和测试环境是一样的接口)
-    ipUrl="http://localhost:7777/api/default"
+    ipUrl="http://127.0.0.1:7777/api/default"
+}else if(process.env.APP_ENV?.trim()==="pro") {
+      //生产环境接口地址,http://127.0.0.1/api/default是服务器用nginx代理了http://127.0.0.1:7777端口
+    ipUrl="http://127.0.0.1/api/default"  
 }
     
 
