@@ -1,0 +1,14 @@
+.hot{
+    width:  100%;
+}
+
+
+.ant-list-items  li a{
+    display: inline-block;
+    width: 10rem;
+    
+    align-items: initial;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -1,0 +1,33 @@
+.header{
+    width: 100%;
+    background-color: #fff;
+    padding: 4rem;
+    height: 2.8rem;
+    overflow: hidden;
+    border-bottom: 1px solid grey;
+}
+.header-icon{
+    font-size: 2rem !important;
+}
+.header-logo{
+    color:#1e90ff;
+    font-size: 1.6rem;
+    text-align: left;
+}
+.header-txt{
+    font-size: .6rem;
+    color: #999;
+    display: inline-block;
+    padding-left: .3rem;
+}
+
+.ant-menu-item{
+    padding-left: 2rem;
+}
+.ant-menu-horizontal{
+    border: none!important;
+}
+
+.ant-menu-item a:active{
+    color: #1e90ff;
+}

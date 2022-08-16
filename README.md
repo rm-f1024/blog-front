@@ -1,1 +1,2 @@
-# blog-front
+# my-blog
+this a blog project

@@ -1,0 +1,30 @@
+
+.list-title{
+    font-size:1.3rem;
+    color: #1e90ff;
+    padding: 0 0.5rem;
+}
+.list-context {
+    position: relative;
+    color:#777;
+    padding:.5rem;
+    overflow: hidden;
+    /* height: 10rem; */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    text-overflow: ellipsis;
+    
+}
+.list-context p img{
+  max-width: 100%;
+}
+
+.list-icon{
+    padding:.5rem 0;
+    color:#AAA;
+}
+.list-icon span{
+    display: inline-block;
+    padding: 0 10px;
+}
