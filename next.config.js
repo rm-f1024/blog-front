@@ -10,7 +10,7 @@ module.exports = {
   distDir: 'build',
   images: {
     loader: 'akamai',
-    path: '/',
+    path: '/front',
   },
   env: {
     APP_ENV: process.env.APP_ENV

@@ -16,7 +16,7 @@ module.exports = appInfo => {
   config.cluster = {
     listen: {
       port: 9999,
-      hostname: '127.0.0.1', // 不建议设置 hostname 为 '0.0.0.0'，它将允许来自外部网络和来源的连接，请在知晓风险的情况下使用
+      hostname: 'localhost', // 不建议设置 hostname 为 '0.0.0.0'，它将允许来自外部网络和来源的连接，请在知晓风险的情况下使用
       // path: '/var/run/egg.sock',
     },
   };
@@ -35,7 +35,7 @@ module.exports = appInfo => {
     // database configuration
     client: {
       // host
-      host: '127.0.0.1',
+      host: 'localhost',
       // port
       port: '3306',
       // username
@@ -57,9 +57,9 @@ module.exports = appInfo => {
     
     },
     domainWhiteList:[
-    'http://127.0.0.1:3000',
-    'http://localhost:3000',
-  ]//[]中放放出的白名单，*代表所有
+      'http://localhost:3000',
+      'http://localhost:5000'
+    ]//[]中放放出的白名单，*代表所有
   };
   
   config.cookies= {
