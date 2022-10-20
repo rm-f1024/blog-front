@@ -12,14 +12,9 @@ module.exports = appInfo => {
    * @type {Egg.EggAppConfig}
    **/
   const config = exports = {};
-
-  config.cluster = {
-    listen: {
-      port: 9999,
-      hostname: 'localhost', // 不建议设置 hostname 为 '0.0.0.0'，它将允许来自外部网络和来源的连接，请在知晓风险的情况下使用
-      // path: '/var/run/egg.sock',
-    },
-  };
+ 
+   
+ 
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1647697854675_3368';
 
@@ -56,10 +51,11 @@ module.exports = appInfo => {
       ignoreJSON: true
     
     },
-    domainWhiteList:[
-      'http://localhost:3000',
-      'http://localhost:5000'
-    ]//[]中放放出的白名单，*代表所有
+    domainWhiteList:['http://localhost:2000',
+    'http://localhost:3000',
+    'http://localhost:7001',
+    
+  ]//[]中放放出的白名单，*代表所有
   };
   
   config.cookies= {
@@ -70,8 +66,6 @@ module.exports = appInfo => {
     credentials: true,  //允许Cook可以跨域
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
   };
-
-
   return {
     ...config,
     ...userConfig,

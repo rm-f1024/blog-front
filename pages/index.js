@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { Col, Row, List, Breadcrumb } from 'antd'
+import { Col, Row, List, Breadcrumb, BackTop } from 'antd'
+import { } from 'antd';
 import React, { useState } from 'react'
 import Header from '../components/header.js'
 import Hot from '../components/hot.js'
@@ -13,8 +14,10 @@ import { marked } from 'marked'
 import highlight from 'highlight.js'
 import { ReadOutlined, BulbOutlined, CarryOutOutlined } from '@ant-design/icons'
 import axios from 'axios'
+
 //首页
 export default function Index({ type, data }) {
+  
   marked.setOptions({
     renderer: new marked.Renderer(),
     highlight: function (code) {
@@ -33,9 +36,9 @@ export default function Index({ type, data }) {
   });
 
 
-  const  addRead = (id,read) =>{
-    console.log('id=============>',id)
-    console.log('read=============>',read)
+  const addRead = (id, read) => {
+    console.log('id=============>', id)
+    console.log('read=============>', read)
     let obj = {
       id: id,
       read: read + 1
@@ -51,7 +54,11 @@ export default function Index({ type, data }) {
         })
 
     }
+   try{
     fetchData?.();
+   }catch(e){
+    console.log(e)
+   }
   }
   for (let item of data) {
     try {
@@ -62,7 +69,7 @@ export default function Index({ type, data }) {
   }
   // //console.log("data", data);
   const [mylist, setMylist] = useState(data)
-  
+
 
   return (
     <div className='rainbow'>
@@ -77,7 +84,6 @@ export default function Index({ type, data }) {
           <div className="bread-div">
             <Breadcrumb>
               <Breadcrumb.Item><Link href="/" ><a >首页</a></Link></Breadcrumb.Item>
-
             </Breadcrumb>
           </div>
           <List
@@ -97,7 +103,7 @@ export default function Index({ type, data }) {
                   </div>
 
                   <div className='list-title'>
-                    <Link href={{ pathname: `/detail/[id]`, query: { id: item.id } }}><a onClick={()=>{addRead(item.id,item.read)}} >{item.title}</a></Link>
+                    <Link href={{ pathname: `/detail/[id]`, query: { id: item.id } }}><a onClick={() => { addRead(item.id, item.read) }} >{item.title}</a></Link>
                   </div>
                   <div className='list-context' dangerouslySetInnerHTML={{ __html: item.content }}></div>
                 </List.Item>
@@ -114,6 +120,8 @@ export default function Index({ type, data }) {
         </Col>
       </Row>
       <Top />
+
+
       <Footer />
 
 
@@ -132,5 +140,4 @@ export async function getServerSideProps() {
       data
     }
   }
-
 }

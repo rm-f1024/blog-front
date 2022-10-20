@@ -1,13 +1,15 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { Col, Row, List, Breadcrumb, Affix } from 'antd'
-import React, { useState, useEffect } from 'react'
+import { Col, Row, List, Breadcrumb, Affix,Divider } from 'antd'
+import React, { useState ,useEffect} from 'react'
 
 import { marked } from 'marked';
 import highlight from 'highlight.js'
 import MarkNav from 'markdown-navbar';
 import Header from '../../components/header.js'
+import Top from '../../components/top.js'
 import Author from '../../components/author.js'
+import UserComment from '../../components/comment'
 import Advert from '../../components/advert'
 import Hot from '../../components/hot'
 import Footer from '../../components/footer'
@@ -16,20 +18,19 @@ import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
 import { ReadOutlined, BulbOutlined, CarryOutOutlined, FireOutlined, FolderFilled } from '@ant-design/icons'
 import axios from 'axios';
-    
-    
 import servicePath from '../../config/apiUrl.js';
 
 
-export default function Detail({ id }) {
-    let [top, setTop] = useState(10)
-    const [article, setArticle] = useState({});
+export default function Detail({id}) {
+    let [top,setTop]= useState(10)
+    let [myarticle,setArticle]= useState({})
+    //console.log("article======>",myarticle);
     useEffect(() => {
         const fetData =async() => {
         let  res=await axios(servicePath.getArticleById+'/'+id)
-        let {data:{data:[articleInfo]}}= res
-        setArticle({...articleInfo,
-           content: marked.parse(articleInfo.content)
+        let {data:{data:[article]}}= res
+        setArticle({...article,
+           content: marked.parse(article.content)
         })
         }
         fetData?.()
@@ -38,7 +39,7 @@ export default function Detail({ id }) {
         renderer: new marked.Renderer(),
         highlight: function (code) {
             return highlight.highlightAuto(code).value;
-        }
+          }
         ,
         langPrefix: 'hljs language-', // highlight.js css expects a top-level 'hljs' class.
         pedantic: false, //语法容错
@@ -47,11 +48,9 @@ export default function Detail({ id }) {
         sanitize: false,//不忽略html标签
         smartLists: true,
         smartypants: false,
-        tables: true,
+        tables:true,
         xhtml: false
-    });
-
-
+      });
     return (
         <>
             <Head>
@@ -64,20 +63,25 @@ export default function Detail({ id }) {
                     <div className="bread-div">
                         <Breadcrumb>
                             <Breadcrumb.Item><Link href="/"><a>首页</a></Link></Breadcrumb.Item>
-                            <Breadcrumb.Item><Link href="/list"><a >{article.type_name}</a></Link></Breadcrumb.Item>
+                            <Breadcrumb.Item><Link href="/list"><a >{myarticle.type_name}</a></Link></Breadcrumb.Item>
                         </Breadcrumb>
                     </div>
                     <div className='detail-title'>
-                        {article.title}
+                      {myarticle.title}
                     </div>
                     <div className='detail-center'>
-                        <CarryOutOutlined />{article.addtime1}
-                        <FireOutlined />{article.read}
-                        <FolderFilled />{article.type_name}
+                        <CarryOutOutlined />{myarticle.addtime1}
+                        <FireOutlined />{myarticle.read}
+                        <FolderFilled />{myarticle.type_name}
                     </div>
                     <div className='detail-content'
-                        dangerouslySetInnerHTML={{ __html:article.content }}>
+                    dangerouslySetInnerHTML={{__html:myarticle.content}}>
                     </div>
+                    <Divider plain orientation='left'>
+                        评论
+                    </Divider>
+                    <UserComment articleId={id}/>
+
                 </Col>
                 <Col className='comm-right' xs={0} sm={0} md={7} lg={5} xl={4}>
                     < Author />
@@ -86,7 +90,7 @@ export default function Detail({ id }) {
                             <div className="nav-title">文章目录</div>
                             <MarkNav
                                 className="article-menu"
-                                source={article.content}
+                                source={myarticle.content} 
                                 ordered={false}
                             />
                         </div>
@@ -94,25 +98,28 @@ export default function Detail({ id }) {
                     <Hot />
                 </Col>
             </Row>
+
+            <Top/>
             <Footer />
+
+
         </>
     )
 }
-export async function getStaticPaths() {
+export     async function getStaticPaths(){
     let res = await fetch(servicePath.getArticleId)
-    let { data } = await res.json()
-    const paths = data.map((data) => {
-        return { params: { id: data.id.toString() } }
+    let {data} = await res.json()
+    const paths= data.map((data) => {
+        return {params:{id:data.id.toString()}}
     })
-    return { paths, fallback: true }
+    return { paths, fallback: false }
 }
-export async function getStaticProps({ params  }) {
+
+export     async function getStaticProps({params}){
+    let id = params.id
     return {
-        props: {
-            id:params.id
-        },
-        revalidate: 1, // In seconds
+        props:{
+            id
+        }
     }
 }
-
-

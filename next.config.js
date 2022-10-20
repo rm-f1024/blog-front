@@ -5,16 +5,12 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
 const { createProxyMiddleware } = require('http-proxy-middleware');
 module.exports = {
-  assetPrefix: "/front", //加前缀
-  basePath: "/front", //node
+  assetPrefix:'/',
   distDir: 'build',
   images: {
     loader: 'akamai',
-    path: '/front',
+    path: '/',
   },
-  env: {
-    APP_ENV: process.env.APP_ENV
-  }
   // exportPathMap: async function (
   //   defaultPathMap,
   //   { dev, dir, outDir, distDir, buildId }

@@ -14,7 +14,12 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 5;
     text-overflow: ellipsis;
+  
     
+}
+.list-context a{
+    display :inline !important ;
+  
 }
 .list-context p img{
   max-width: 100%;
